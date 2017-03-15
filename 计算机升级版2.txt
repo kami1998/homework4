@@ -285,7 +285,27 @@ void language2(char language)
 		}
 }
 
-
+void language3(char language,int right,int b)
+{
+	switch(language)
+	{
+			case 'C':
+				cout << "您答对了" << right << "道题；" <<"答错了"<<b-right<<"道题。"<< endl;
+				break;
+			case 'E':
+				cout<<"You are right "<<right<<" problem(s);"<<"wrong "<<b-right<<" problem(s)."<<endl;
+				break;
+			case 'R':
+				cout<<"あなたは正答しました"<<right<<"題;"<<"誤答して"<<b-right<<"題。"<<endl;
+				break;
+			case 'D':
+				cout<<"Sie beantwortet"<<right<<"Problem;" <<"Die falsch"<<b-right<<"Problem。"<<endl;
+				break;
+			case 'F':
+				cout<<"Vous avez gagné"<<right<<"Problème;"<<"Mauvaise réponse"<<b-right<<"Problème."<<endl;
+				break;
+	}
+}
 int main()
 {
 	int j,b,CLASS;
@@ -324,26 +344,7 @@ int main()
 	language2(language);
 	cin>>over;
 	if(over=='O')
-		{
-				switch(language)
-		{
-			case 'C':
-				cout << "您答对了" << right << "道题；" <<"答错了"<<b-right<<"道题。"<< endl;
-				break;
-			case 'E':
-				cout<<"You are right "<<right<<" problem(s);"<<"wrong "<<b-right<<" problem(s)."<<endl;
-				break;
-			case 'R':
-				cout<<"あなたは正答しました"<<right<<"題;"<<"誤答して"<<b-right<<"題。"<<endl;
-				break;
-			case 'D':
-				cout<<"Sie beantwortet"<<right<<"Problem;" <<"Die falsch"<<b-right<<"Problem。"<<endl;
-				break;
-			case 'F':
-				cout<<"Vous avez gagné"<<right<<"Problème;"<<"Mauvaise réponse"<<b-right<<"Problème."<<endl;
-				break;
-		}
-		}
+	language3(language,right,b);
 	system("pause");
 	return 0;
 
