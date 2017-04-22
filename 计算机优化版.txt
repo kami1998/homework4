@@ -104,11 +104,6 @@ void generateExpression(int n)
 		classone();
 	}
 }
-
-void classtwo()
-{
-	
-}
 int main()
 {
 	int n=scan();
