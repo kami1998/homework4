@@ -104,12 +104,6 @@ void generateExpression(int n)
 		classone();
 	}
 }
-int class2()
-{
-	srand(time(0));
-	int classes=rand()%2;
-	return classes;
-}
 
 void classtwo()
 {
