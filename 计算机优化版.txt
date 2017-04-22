@@ -1,6 +1,7 @@
 #include"iostream"
 #include<ctime>
 #include<stdlib.h>
+int sum=0; 
 using namespace std;
 double calculateResult(int a,int b,int c)
 {
@@ -60,7 +61,10 @@ char transform(int a)
 void print(int a,int b)
 {
 	if(a==1)
+	{
 	cout<<"您答对了"<<endl;
+	sum++;
+    }
 	else
 	cout<<"您答错了，正确答案是"<<b<<endl; 
 }
@@ -104,8 +108,20 @@ void generateExpression(int n)
 		classone();
 	}
 }
+void stat()
+{
+	cout<<"按O查看答题情况"<<endl;
+	char a;
+	cin>>a;
+	if(a=='O')
+	{
+		cout<<"您答对了"<<sum<<"道题"<<endl;
+	}
+ } 
 int main()
 {
 	int n=scan();
 	generateExpression(n);
+	stat();
+	return 0;
 }
