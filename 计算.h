@@ -1,2 +1,2 @@
 #include"iostream"
-double count(double r);//定义函数计算
+double count(double r);//瀹氫箟鍑芥暟
