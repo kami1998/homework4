@@ -1,12 +1,12 @@
 #include"iostream"
-#include"¼ÆËã.h"//°üº¬Í·¼ÆËãÃæ»ıµÄÍ·ÎÄ¼ş
-#include"iomanip"
+#include"è®¡ç®—.h"//åŒ…å«å¤´è®¡ç®—é¢ç§¯çš„å¤´æ–‡ä»¶
+#include"iomanip"//æ§åˆ¶è¾“å‡ºå°æ•°ä½æ•°
 using namespace std;
 int main()
 {
-	double r=0;//³õÊ¼»¯r
-	cin >> r;;//ÊäÈë°ë¾¶r
-	cout << fixed<<setprecision(6)<<count(r) << endl;//Êä³öÃæ»ıµÄºóÁùÎ»Ğ¡Êı
-	system("pause");//³ÌĞòÔËĞĞÍêºóÔİÍ£
+	double r=0;//åˆå§‹åŒ–r
+	cin >> r;;//è¾“å…¥åŠå¾„r
+	cout << fixed<<setprecision(6)<<count(r) << endl;//è¾“å‡ºé¢ç§¯çš„åå…­ä½å°æ•°
+	system("pause");//ç¨‹åºè¿è¡Œå®Œåæš‚åœ
 	return 0;
 }
