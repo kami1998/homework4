@@ -17,13 +17,13 @@ double calculateResult(int a, int b, int c)
 }
 int scan(string argv)
 {
-	cout << "ÇëÊäÈëËùÐèÌâÄ¿ÊýÁ¿£º" << endl;
+	cout << "è¯·è¾“å…¥æ‰€éœ€é¢˜ç›®æ•°é‡ï¼š" << endl;
 	int n;
 	ifstream infile;
 	infile.open(argv);
 	if (!infile.is_open())
 	{
-		cout << "ÎÄ¼þ´ò¿ªÊ§°Ü" << endl;
+		cout << "æ–‡ä»¶æ‰“å¼€å¤±è´¥" << endl;
 		exit(1);
 	}
 	infile >> n;
@@ -72,14 +72,14 @@ void print(int a, int b,ofstream &outfile)
 {
 	if (a == 1)
 	{
-		cout << "Äú´ð¶ÔÁË" << endl;
-		outfile << "Äú´ð¶ÔÁË" << endl;
+		cout << "æ‚¨ç­”å¯¹äº†" << endl;
+		outfile << "æ‚¨ç­”å¯¹äº†" << endl;
 		zheng++;
 	}
 	else
 	{
-		cout << "Äú´ð´íÁË£¬ÕýÈ·´ð°¸ÊÇ" << b << endl;
-		outfile << "Äú´ð´íÁË£¬ÕýÈ·´ð°¸ÊÇ" << b << endl;
+		cout << "æ‚¨ç­”é”™äº†ï¼Œæ­£ç¡®ç­”æ¡ˆæ˜¯" << b << endl;
+		outfile << "æ‚¨ç­”é”™äº†ï¼Œæ­£ç¡®ç­”æ¡ˆæ˜¯" << b << endl;
 	}
 }
 void classone(ofstream & outfile)
@@ -112,7 +112,7 @@ void classone(ofstream & outfile)
 	outfile << "(" << n1 << op1 << n2 << ")" << op2 << "(" << n3 << op3 << n4 << ")="<<endl;
 	int answer;
 	cin >> answer;
-	outfile << "ÄúµÄ´ð°¸ÊÇ" << answer << endl;
+	outfile << "æ‚¨çš„ç­”æ¡ˆæ˜¯" << answer << endl;
 	if (answer != (int)result)
 		judge = 0;
 	print(judge, (int)result,outfile);
@@ -127,19 +127,18 @@ void generateExpression(int n,ofstream & outfile)
 
 int main(int args,char* argv[])
 {
-        cout<<argv[1]<<" "<<argv[2]<<endl;
 	int n = scan(argv[1]);
 	ofstream outfile;
 	outfile.open(argv[2]);
         if(!outfile.is_open())
         cout<<"123"<<endl;
 	generateExpression(n,outfile);
-	outfile << "Äã´ð¶ÔÁË " << zheng << " µÀÌâ¡£" << endl;
-	cout << "°´e²é¿´´ðÌâÇé¿ö" << endl;
+	outfile << "ä½ ç­”å¯¹äº† " << zheng << " é“é¢˜ã€‚" << endl;
+	cout << "æŒ‰eæŸ¥çœ‹ç­”é¢˜æƒ…å†µ" << endl;
 	char r;
 	cin >> r;
 	if(r=='e')
-		cout << "Äã´ð¶ÔÁË " << zheng << " µÀÌâ¡£" << endl;
+		cout << "ä½ ç­”å¯¹äº† " << zheng << " é“é¢˜ã€‚" << endl;
 	outfile.close();
 	system("pause");
 	return 0;
