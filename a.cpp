@@ -1,25 +1,33 @@
-#include"iostream"
+#include <iostream>
+#include <stdlib.h>
+#include  <fstream>
 #include<ctime>
-#include<stdlib.h>
-#include<fstream>
-#include"string"
-int zheng = 0;
+#include <string> 
+#define Z '+'
+#define X '-'
+#define C '*'
+#define V '/'
 using namespace std;
-double calculateResult(int a, int b, int c)
+char language, over;
+int  kind, r;
+int n;
+float s;
+
+
+
+void	printthree(float v, ofstream &outfile)
 {
-	switch (a)
-	{
-	case 0:return (double)b + (double)c; break;
-	case 1:return (double)b - (double)c; break;
-	case 2:return (double)b*(double)c; break;
-	case 3:return (double)b / (double)c; break;
-	}
+
+	
+		cout << "答案是：" << v << endl;
+		outfile << "答案是：" << v <<endl;
+	
 }
-int scan(string argv)//扫描文件中的要求的算式数量
+int scan(string argc)//扫描文件中的要求的算式数量
 {
 	int n;
 	ifstream infile;
-	infile.open(argv);
+	infile.open(argc)
 	if (!infile.is_open())
 	{
 		cout << "文件打开失败" << endl;
@@ -29,255 +37,413 @@ int scan(string argv)//扫描文件中的要求的算式数量
 	infile.close();
 	return n;
 }
-int randomNumber()//产生随机数
+void generateExpression(int num, ofstream &outfile)//用于生成运算式
 {
-	int number = rand() % 10;
-	return number;
-}
-void change1(int &b, int &c)//要是除法出现非整数或者除数为0 更改算式 使其结果为整数
-{
-	while (true)
+	void generateExpressionone(ofstream & outfile);
+	void generateExpressiontow(ofstream & outfile);
+	void generateExpressionthree(ofstream & outfile);
+	void generateExpressionfour(ofstream & outfile);
+	void generateExpressionfive(ofstream & outfile);
+
+	int i;
+	srand(time(0));
+	for (i = 1; i <= num; i++)
 	{
-		if (c == 0)
+		kind = rand() % 5;
+		switch (kind)
 		{
-			c = randomNumber();
-			continue;
+		case 0:
+			generateExpressionone(outfile);
+			break;
+		case 1:
+			generateExpressiontow(outfile);
+			break;
+		case 2:
+			generateExpressionthree(outfile);
+			break;
+		case 3:
+			generateExpressionfour(outfile);
+			break;
+		case 4:
+			generateExpressionfive(outfile);
+			break;
 		}
-		double s = (double)b / (double)c;
-		if (s - (int)s != 0)
-		{
-			b = randomNumber();
-			c = randomNumber();
-		}
-		else break;
-	}
-}
-void change2(int &a, int& b, int &c)
-{
-	while (true)
-	{
-		if (b == 0)
-		{
-			c = randomNumber();
-			continue;
-		}
-		if (c == 0)
-		{
-			c = randomNumber();
-			continue;
-		}
-		double s = (double)a / (double)b / (double)c;
-		if (s - (int)s != 0)
-		{
-			b = randomNumber();
-			c = randomNumber();
-		}
-		else break;
+
+
 
 	}
+
 }
-int randonOperation()//产生随机运算符
+float   calculateResultone(float k1, float k2, float k3, float k4, int m1, int m2, int m3, int i, int f)//用于计算生成的运算式的结果
 {
-	int operation = rand() % 4;
-	return operation;
+	float l1=0, l2=0;
+	float counting(int a, float b, float c, float t);
+	l1 = counting(m1, k1, k2, l1);
+	l2 = counting(m3, k3, k4, l2);
+	if (l2 == 0 && m2 == 3)
+	{
+		i--;
+		f = 1;
+		return 0;
+	}
+
+	s = counting(m2, l1, l2, s);
+	return s;
 }
-char transform(int a)//将产生的随机运算符转化为符号
+
+void generateExpressionone(ofstream &outfile)
+{
+	int randomNumber();
+	int randomOperation();
+	int  m1, m2, m3, a, f = 0;
+	char n1 = 'a', n2 = 'a', n3 = 'a';
+	float l1, l2, k1, k2, k3, k4;
+	srand(time(0));
+	char sigh(int d, char n);
+	for (int i = 0; i < 1; i++)
+	{
+		k1 = randomNumber();//用于随机生成数字
+		k2 = randomNumber();
+		k3 = randomNumber();
+		k4 = randomNumber();
+		m1 = randomOperation();//用于随机生成运算符
+		m2 = randomOperation();//用于随机生成运算符
+		m3 = randomOperation();//用于随机生成运算符
+		s = calculateResultone(k1, k2, k3, k4, m1, m2, m3, i, f);//用于计算生成的运算式的结果
+		if (f == 1)continue;
+		if (s - (int)s != 0)
+		{
+			i--;
+			continue;
+		}
+		n3 = sigh(m3, n3);//转换符号
+		n2 = sigh(m2, n2);
+		n1 = sigh(m1, n1);
+
+		if (s - (int)s == 0)
+		{
+			cout << "（" << k1 << n1 << k2 << ")" << n2 << "(" << k3 << n3 << k4 << ")=";
+			outfile << "（" << k1 << n1 << k2 << ")" << n2 << "(" << k3 << n3 << k4 << ")=";
+			cin >> a;
+			outfile << a;
+			printthree(s,outfile);
+			if (a == s)
+				r++;
+		}
+	}
+}
+
+float   calculateResulttow(float k1, float k2, int m1, int i, int f)//用于计算生成的运算式的结果
+{
+	float l1, l2=0;
+	float counting(int a, float b, float c, float t);
+	s = counting(m1, k1, k2, s);
+	if (l2 == 0 && m1 == 3)
+	{
+		i--;
+		f = 1;
+		return 0;
+	}
+
+	return s;
+}
+void generateExpressiontow(ofstream &outfile)
+{
+	int randomNumber();
+	int randomOperation();
+	float counting(int a, float b, float c, float t);
+	char sigh(int d, char n);
+	int  m1, a, f = 0;
+	char n1 = 'a';
+	float k1, k2;
+	srand(time(0));
+	for (int i = 0; i < 1; i++)
+	{
+		k1 = randomNumber();
+		k2 = randomNumber();
+		m1 = randomOperation();
+		n1 = sigh(m1, n1);
+		s = calculateResulttow(k1, k2, m1, i, f);
+		if (f == 1)continue;
+		if (s - (int)s != 0)
+		{
+			i--;
+			continue;
+		}
+		if (s - (int)s == 0)
+		{
+			cout << k1 << n1 << k2 << "=";
+			outfile << k1 << n1 << k2 << "=";
+			cin >> a;
+			outfile << a << endl;
+			printthree(s,outfile);
+			if (a == s)
+				r++;
+		}
+	}
+}
+float   calculateResultthree(float k1, float k2, float k3, int m1, int m2, int i, int f)//用于计算生成的运算式的结果
+{
+	float l1;
+	float counting(int a, float b, float c, float t);
+	l1 = counting(m1, k1, k2, s);
+	if (k3 == 0 && m2 == 3)
+	{
+		i--;
+		f = 1;
+		return 0;
+	}
+	s = counting(m2, l1, k3, s);
+	return s;
+}
+void generateExpressionthree(ofstream &outfile)
+{
+	int f=0;
+	int randomNumber();
+	int randomOperation();
+	float counting(int a, float b, float c, float t);
+	char sigh(int d, char n);
+	int m1, m2, a;
+	char n1 = 'a', n2 = 'a';
+	float s, l1, k1, k2, k3;
+	srand(time(0));
+	for (int i = 0; i<1; i++)
+	{
+		k1 = randomNumber();
+		k2 = randomNumber();
+		k3 = randomNumber();
+		m1 = randomOperation();
+		m2 = randomOperation();
+		s = calculateResultthree(k1, k2, k3, m1, m2, i, f);
+		n1 = sigh(m1, n1);
+		n2 = sigh(m2, n2);
+		if (s - (int)s != 0)
+		{
+			i--;
+			continue;
+		}
+		if (s - (int)s == 0)
+		{
+			cout << "（" << k1 << n1 << k2 << ")" << n2 << k3 << "=";
+			outfile << "（" << k1 << n1 << k2 << ")" << n2 << k3 << "=";
+			cin >> a;
+			outfile << a << endl;
+			printthree(s,outfile);
+			if (a == s)
+				r++;
+		}
+	}
+
+}
+float   calculateResultfour(float k1, float k2, float k3, int m1, int m2, int i, int f)//用于计算生成的运算式的结果
+{
+	float l1;
+	float counting(int a, float b, float c, float t);
+	l1 = counting(m2, k2, k3, s);
+	if (l1 == 0 && m1 == 3)
+	{
+		i--;
+		f = 1;
+		return 0;
+	}
+	s = counting(m1, k1, l1, s);
+	return s;
+}
+void generateExpressionfour(ofstream &outfile)
+{
+	int f=0;
+	int randomNumber();
+	int randomOperation();
+	float counting(int a, float b, float c, float t);
+	char sigh(int d, char n);
+	int m1, m2, a;
+	char n1 = 'a', n2 = 'a';
+	float k1, k2, k3, l1;
+
+	srand(time(0));
+	for (int i = 0; i<1; i++)
+	{
+		k1 = randomNumber();
+		k2 = randomNumber();
+		k3 = randomNumber();
+		m1 = randomOperation();
+		m2 = randomOperation();
+		n2 = sigh(m2, n2);
+		n1 = sigh(m1, n1);
+		s = calculateResultfour(k1, k2, k3, m1, m2, i, f);
+		if (s - (int)s != 0)
+		{
+			i--;
+			continue;
+		}
+		if (s - (int)s == 0)
+		{
+			cout << k1 << n1 << "(" << k2 << n2 << k3 << ")=";
+			outfile << k1 << n1 << "(" << k2 << n2 << k3 << ")=";
+			cin >> a;
+			outfile << a << endl;
+			printthree(s,outfile);
+			if (a == s)
+				r++;
+		}
+	}
+}
+void generateExpressionfive(ofstream &outfile)
+{
+	int randomNumber();
+	int randomOperation();
+	float counting(int a, float b, float c, float t);
+	char sigh(int d, char n);
+	int m1, m2, a, m3;
+	char n1 = 'a', n2 = 'a', n3 = 'a';
+	float s=0, l1=0, k1, k2, k3, k4;
+	srand(time(0));
+	for (int i = 0; i<1; i++)
+	{
+		k1 = randomNumber();
+		k2 = randomNumber();
+		k3 = randomNumber();
+		k4 = randomNumber();
+		m1 = randomOperation();
+		m2 = randomOperation();
+		m3 = randomOperation();
+		l1 = counting(m1, k1, k2, l1);
+		n1 = sigh(m1, n1);
+		if (k3 == 0 && m2 == 3)
+		{
+			i--;
+			continue;
+		}
+		if (k4 == 0 && m3 == 3)
+		{
+			i--;
+			continue;
+		}
+		if (m3 == 0 || m3 == 1)
+		{
+			i--;
+			continue;
+		}
+		if (m2 == 0 || m2 == 1)
+		{
+			i--;
+			continue;
+		}
+		s = counting(m2, l1, k3, s);
+		s = counting(m3, s, k4, s);
+		n2 = sigh(m2, n2);
+		n3 = sigh(m3, n3);
+		if (s - (int)s != 0)
+		{
+			i--;
+			continue;
+		}
+		if (s - (int)s == 0)
+		{
+			cout << "（" << k1 << n1 << k2 << ")" << n2 << k3 << n3 << k4 << "=";
+			outfile << "（" << k1 << n1 << k2 << ")" << n2 << k3 << n3 << k4 << "=";
+			cin >> a;
+			outfile << a << endl;
+			printthree(s,outfile);
+			if (a == s)
+				r++;
+		}
+	}
+
+}
+int randomOperation()
+{
+	int a;
+
+	a = rand() % 4;
+	return a;
+}
+int randomOperation1()
+{
+	int a;
+
+	a = rand() % 2;
+	return a;
+}
+int randomNumber()
+{
+
+	int a;
+	a = rand() % 10;
+	return a;
+}
+float counting(int a, float b, float c, float t)
 {
 	switch (a)
 	{
-	case 0:return '+'; break;
-	case 1:return '-'; break;
-	case 2:return '*'; break;
-	case 3:return '/'; break;
-	}
-}
-void print(int a, int b,ofstream &outfile)//打印答题的对错情况冰糖同时输出到out.txt文件中
-{
-	if (a == 1)
-	{
-		cout << "您答对了" << endl;
-		outfile << "您答对了" << endl;
-		zheng++;
-	}
-	else
-	{
-		cout << "您答错了，正确答案是" << b << endl;
-		outfile << "您答错了，正确答案是" << b << endl;
-	}
-}
-void classone(ofstream & outfile)//（3+4）*（5+6）类型的算式
-{
-	srand(time(0));
-	double result;
-	int n1, n2, n3, n4, o1, o2, o3, judge = 1;
-	char op1, op2, op3;
-	while (true)
-	{
-		n1 = randomNumber();
-		n2 = randomNumber();
-		n3 = randomNumber();
-		n4 = randomNumber();
-		o1 = randonOperation();
-		o2 = randonOperation();
-		o3 = randonOperation();
-		op1 = transform(o1);
-		op2 = transform(o2);
-		op3 = transform(o3);
-		if (op1 == '/')
-			change1(n1, n2);
-		if (op3 == '/')
-			change1(n3, n4);
-		result = calculateResult(o2, calculateResult(o1, n1, n2), calculateResult(o3, n3, n4));
-		if (result - (int)result == 0)
-			break;
-	}
-	cout << "(" << n1 << op1 << n2 << ")" << op2 << "(" << n3 << op3 << n4 << ")=";
-	outfile << "(" << n1 << op1 << n2 << ")" << op2 << "(" << n3 << op3 << n4 << ")="<<endl;
-	int answer;
-	cin >> answer;
-	outfile << "您的答案是" << answer << endl;
-	if (answer != (int)result)
-		judge = 0;
-	print(judge, (int)result,outfile);
-}
-void classtwo(ofstream& outfile)// (3+4)*5*l类型的算式
-{
-	srand(time(0));
-	double result=0;
-	int result2=0;
-	int n1, n2, n3, n4, o1, o2, o3, judge = 1;
-	char op1, op2, op3;
-	while (true)
-	{
-		n1 = randomNumber();
-		n2 = randomNumber();
-		n3 = randomNumber();
-		n4 = randomNumber();
-		o1 = randonOperation();
-		o2 = randonOperation();
-		o3 = randonOperation();
-		op1 = transform(o1);
-		op2 = transform(o2);
-		op3 = transform(o3);
-		if (op1 == '/')
-			change1(n1, n2);
-		double n = calculateResult(o1, n1, n2);
-		result2 = (int)calculateResult(o1, n1, n2);
-		if (op2 == '*')
-		{
-			if (op3 == '*')
-				result = calculateResult(o1, n1, n2)*n3*n4;
-			else if (op3 == '/')
+	case 0:
+		t = b + c*1.0;
+		break;
+	case 1:
+		t = b - c*1.0;
+		break;
+	case 2:
+		t = b * c*1.0;
+		break;
+	case 3:
+		if (c == 0)
+			for (int j = 0;; j++)
 			{
-				while (true)
-				{
-					if ((result2*n3 / n4 - ((double)result2*((double)n3) / ((double)n4))) == 0)
-					{
-						result = result2*n3 / n4;
-						break;
-					}
-					else
-						n4 = randomNumber();
-				}
+				c = rand() % 10;
+				if (c != 0)break;
 			}
-			else if (op3 == '+')
-				result = n*n3 + n4;
-			else if (op3 == '-')
-				result = n*n3 - n4;
-		}
-		else if (op2 == '/')
-		{
-			if (op3 == '/')
-			{
-				change2(result2, n3, n4);
-				result = n / n3 / n4;
-			}
-			if (op3 == '*')
-			{
-				while (true)
-				{
-					if ((result2*n4 / n3 - ((double)result2*((double)n4) / ((double)n3))) == 0)
-					{
-						result = result2*n4 / n3;
-						break;
-					}
-					else
-						n3 = randomNumber();
-				}
-			}
-			else
-			{
-				while (true)
-				{
-					double s = n / n3;
-					if (s - (int)s != 0)
-						n3 = randomNumber();
-					else
-						break;
-				}
-				if (op3 == '+')
-					result = n / n3 + n4;
-				if (op3 == '-')
-					result = n / n3 - n4;;
-			}
-		}
-		else
-		{
-			if (op3 == '*')
-				result = calculateResult(o2, (int)n, n3*n4);
-			if (op3 == '/')
-			{
-				change1(n3, n4);
-				result = calculateResult(o2, (int)n, n3/n4);
-			}
-			else
-				result = calculateResult(o3,calculateResult(o2, (int)n, n3),n4);
-		}
-		if (result - (int)result == 0)
-			break;
+		t = b *1.0 / c;
+		break;
+
 	}
-	cout << "(" << n1 << op1 << n2 << ")" << op2  << n3 << op3 << n4 << "=";
-	outfile << "(" << n1 << op1 << n2 << ")" << op2 << n3 << op3 << n4 << "=" << endl;
-	int answer;
-	cin >> answer;
-	outfile << "您的答案是" << answer << endl;
-	if (answer != (int)result)
-		judge = 0;
-	print(judge, (int)result, outfile);
+	return t;
 }
-int chooseclass()
+
+char sigh(int d, char n)
 {
-	return rand() % 2;
-}
-void generateExpression(int n, ofstream & outfile)//产生随机算式
-{
-	for (int i = 0; i<n; i++)
+	switch (d)
 	{
-		int classes = chooseclass();
-		if (classes == 0)
-			classone(outfile);
-		if (classes == 1)
-			classtwo(outfile);
+	case 0:
+		n = Z;
+		break;
+	case 1:
+		n = X;
+		break;
+	case 2:
+		n = C;
+		break;
+	case 3:
+		n = V;
+		break;
+	}
+	return n;
+}
+void print(ofstream &outfile)
+{
+
+	cout << "请按O查看答题情况" << endl;
+	outfile << "请按O查看答题情况" << endl;
+
+	cin >> over;
+	if (over == 'O')
+	{
+
+		cout << "您答对了" << r << "道题；" << "答错了" << n - r << "道题。" << endl;
+		outfile << "您答对了" << r << "道题；" << "答错了" << n - r << "道题。" << endl;
 	}
 }
-int main(int args,char* argv[])
+int main(int argv, char *argc[])
 {
-	int n = scan(argv[1]);
+
+		n=scan(argv[1]);
 	ofstream outfile;
-	outfile.open(argv[2]);
+	outfile.open(argv[2])
 	if (!outfile.is_open())
 	{
 		cout << "文件无法打开" << endl;
 		exit(1);
 	}
-	generateExpression(n,outfile);
-	outfile << "你答对了 " << zheng << " 道题。" << endl;
-	cout << "按e查看答题情况" << endl;
-	char r;
-	cin >> r;
-	if(r=='e')
-		cout << "你答对了 " << zheng << " 道题。" << endl;
-	outfile.close();
-	system("pause");
+	generateExpression(n,outfile);//用于生成运算式;
+	print(outfile);//将统计结果输出给用户
 	return 0;
 }
